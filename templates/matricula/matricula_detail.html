@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Detalle de la solicitud de matricula</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_content">
+
+                          <h2>
+                              <strong>Estudiante:</strong>
+                              <spam>{{object.estudiante}}</spam>
+                          </h2>
+                          <h2>
+                              <strong>Año lectivo:</strong>
+                              <span>{{ object.ciclo_lectivo }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Curso:</strong>
+                              <span>{{ object.curso }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Paralelo:</strong>
+                              <span>{{ object.paralelo }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Observación:</strong>
+                              <span>{{ object.observacion }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Fecha:</strong>
+                              <span>{{ object.fecha }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Matricula acceptada:</strong>
+                              <span>{{ object.matricula_aceptada }}</span>
+                          </h2>
+                          <div style="display: flex; justify-content: center;">
+                              <a href="{% url 'matricula:matricula_list' %}" class="btn btn-primary">Regresar</a>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

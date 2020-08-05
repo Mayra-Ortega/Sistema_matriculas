@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+            <div class="right_col" role="main">
+              <div id="bootstrap_messages" style="margin-top:5em;">
+                {% bootstrap_messages %}
+              </div>
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Crear Paralelo</h3>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                  <form  method="POST"  enctype="multipart/form-data">
+                                    <span class="section">Formulario de creación de paralelo</span>
+                                      {% csrf_token %}
+                                      {% bootstrap_form form_paralelo layout='horizontal' %}
+                                        <div class="ln_solid">
+                                          <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-success">Guardar</button>
+                                                    <a href="{% url 'institucion:paralelo_list' %}" class="btn btn-primary">Regresar</a>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock content %}

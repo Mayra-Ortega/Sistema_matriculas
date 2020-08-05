@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="right_col" role="main">
+  <div id="bootstrap_messages" style="margin-top:5em;">
+    {% bootstrap_messages %}
+  </div>
+  <div class="">
+    <div class="page-title">
+
+
+      <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h3>Lista de años lectivos</h3>
+            <a href="{% url 'institucion:ciclo_create' %}" class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-plus"></span> Nuevo
+            </a>
+
+          </div>
+          <div class="x_content">
+            <div class="clearfix"></div>
+
+              <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Inicio</th>
+                  <th>Fin</th>
+                  <th>Observación</th>
+                  <th>Activo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+
+              <tbody>
+                  {% for ciclo in object_list %}
+                  <tr>
+                    <td>{{ ciclo.id }} </td>
+                    <td>{{ ciclo.inicio }} </td>
+                    <td>{{ ciclo.fin }} </td>
+                    <td>{{ ciclo.observacion }} </td>
+                    <td>{{ ciclo.ciclo_actual }} </td>
+                    <td>
+                      <a href="{% url 'institucion:ciclo_detail' ciclo.pk %}" type='GET'>
+    											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
+    										</a>
+                      <a href="{% url 'institucion:ciclo_edit' ciclo.pk %}" type='GET'>
+    											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
+    										</a>
+                      <a href="{% url 'institucion:ciclo_delete' ciclo.pk %}"  type='GET'>
+    											<span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
+    										</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          </div>
+      </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+      {% endblock content %}

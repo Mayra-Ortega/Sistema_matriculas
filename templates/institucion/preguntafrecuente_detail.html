@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Detalle de la pregunta</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_content">
+
+                          <h2>
+                              <strong>Pregunta:</strong>
+                              <spam>{{object.pregunta}}</spam>
+                          </h2>
+                          <h2>
+                              <strong>Respuesta:</strong>
+                              <span>{{ object.respuesta }}</span>
+                          </h2>
+
+                          <div style="display: flex; justify-content: center;">
+                              <a href="{% url 'institucion:pregunta_list' %}" class="btn btn-primary">Regresar</a>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

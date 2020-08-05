@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>Form Upload </h3> -->
+      </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+            <img src="{% static 'images/logomineduc.png' %}" class="float" alt="..." width="200" height="100" >
+            <h2 align="center">MINISTERIO DE EDUCACIÓN</h2>
+            <h2 align="center">DISTRITO EDUCATIVO 11D02</h2>
+            <h2 align="center">DIÓCESIS DE LOJA</h2>
+            <div class="clearfix"></div>
+          <div class="x_content">
+            <h3  align="center">UNIDAD EDUCATIVA FISCOMISIONAL "SAN JUAN BAUTISTA"</h3>
+            <p align="center">San José-Catamayo-Loja-Ecuador</p>
+            <br/>
+            <h1  align="center">CERTIFICADO DE MATRÍCULA</h1>
+            <br />
+            <br />
+            <p>Que el/la estudiante: {{matricula.estudiante.usuario.nombres}}, con C.I. {{matricula.estudiante.usuario.ci_ruc}}, previo al cumplimiento
+            de los requisitos reglamentarios, se matriculo en {{matricula.curso}}, paralelo "{{matricula.paralelo}}" según consta
+          en la matrícula Nro:{{matricula.id}} Folio: Nro. {{matricula.id}} del año lectivo {{matricula.ciclo_lectivo.inicio}} - {{matricula.ciclo_lectivo.fin}}</p>
+            <br />
+            <br />
+            <p>San José, {{matricula.fecha}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+{% endblock content %}
