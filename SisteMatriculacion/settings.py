@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -137,3 +139,35 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+## Configuracion para deployar en desarrollo y produccion ##
+# SECURITY WARNING: don't run with debug turned on in production!
+if socket.gethostname().startswith('DESKTOP') or socket.gethostname().startswith('MacBook-Pro-de-Adrian')  or socket.gethostname().startswith('DAX-PC') : # True in your local computer
+    print('LOCAL EVIRONMENT')
+    DEBUG = True
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
+else: #In production
+    print('PRODUCTION EVIRONMENT')
+    PRODUCTION_ENV = True
+    import dj_database_url
+    DEBUG = True
+    import django_heroku
+    DEBUG = True
+    DATABASES['default'] = dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
+
+    # Static asset configuration
+    import os
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
