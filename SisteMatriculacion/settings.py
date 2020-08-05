@@ -142,7 +142,7 @@ STATICFILES_DIRS = (
 
 ## Configuracion para deployar en desarrollo y produccion ##
 # SECURITY WARNING: don't run with debug turned on in production!
-if socket.gethostname().startswith('DESKTOP')
+if socket.gethostname().startswith('DESKTOP'):
     print('LOCAL EVIRONMENT')
     DEBUG = True
     ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
