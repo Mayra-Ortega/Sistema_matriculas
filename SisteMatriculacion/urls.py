@@ -26,7 +26,7 @@ urlpatterns = [
     path(r'institucion/', include(('institucion.urls', 'institucion'), namespace ='institucion')),
     path(r'matricula/', include(('matricula.urls', 'matricula'), namespace ='matricula')),
     path(r'', include('home.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

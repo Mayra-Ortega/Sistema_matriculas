@@ -24,11 +24,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(xcf*ty(h$ylm4wrqqb+bpcl=f@)_dc)mzbwzy415b=wd=f9*k'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -132,18 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-ALLOWED_HOSTS = ['*']
-
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = 'static'
 MEDIA_URL = '/media/'
-STATIC_ROOT = 'staticfiles'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = ( os.path.join('static'), )
+# Parse database configuration from $DATABASE_URL
 
-## Configuracion para deployar en desarrollo y produccion ##
 # SECURITY WARNING: don't run with debug turned on in production!
-if socket.gethostname().startswith('DESKTOP'):
+if socket.gethostname().startswith('DESKTOP') or socket.gethostname().startswith('LAPTOP') or  socket.gethostname().startswith('Dax-PC'): # True in your local computer
     print('LOCAL EVIRONMENT')
     DEBUG = True
     ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
@@ -153,24 +147,6 @@ else: #In production
     DEBUG = True
     DATABASES['default'] = dj_database_url.config()
 
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    # Allow all host headers
-    ALLOWED_HOSTS = ['*']
-
-    # Static asset configuration
-    import os
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
-    STATIC_URL = '/static/'
-
-
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
