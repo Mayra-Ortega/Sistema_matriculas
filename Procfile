@@ -1,1 +1,1 @@
-web: gunicorn sgtt.wsgi
+web: gunicorn SisteMatriculacion.wsgi
