@@ -42,7 +42,6 @@ class RepresentanteForm(forms.ModelForm):
 	class Meta:
 	    model = Padres
 	    fields = (
-			'is_representante',
 			'nivel_educacion',
 			'profesion',
 			'parentesco',

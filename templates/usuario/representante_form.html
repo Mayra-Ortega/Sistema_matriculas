@@ -19,8 +19,14 @@
                                   <form  method="POST"  enctype="multipart/form-data">
                                     <span class="section">Información del Representante</span>
                                       {% csrf_token %}
-                                      {% bootstrap_form form_usuario layout='horizontal' %}
-                                      {% bootstrap_form form_representante layout='horizontal' %}
+                                      {% if hay_estudiante == True %}
+                                        {% if hay_representante == False %}
+                                          {% bootstrap_form form_register layout='horizontal' %}
+                                          {% bootstrap_form form_usuario layout='horizontal' %}
+                                          {% bootstrap_form form_representante layout='horizontal' %}
+                                        {% else %}
+                                          {% bootstrap_form form_register layout='vertical' %}
+                                        {% endif %}
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
@@ -28,6 +34,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% else %}
+                                        <h2>Para acceder a este menu debes primero completar tus datos</h2>
+                                        {% endif %}
                                     </form>
                                 </div>
                             </div>

@@ -86,7 +86,7 @@ class Padres(models.Model):
     padres_estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='padres_estudiante')
     padres_familia = models.CharField(max_length = 50, choices = PADRES_FAMILIA, default='P')
-    is_representante = models.BooleanField(default=True, help_text='Es representante del estudiante')
+    is_representante = models.BooleanField(default=False, help_text='Es representante del estudiante')
     parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE)
     nivel_educacion = models.ForeignKey(NivelEducativo, on_delete=models.CASCADE)
     profesion = models.ForeignKey(Profesion, on_delete=models.CASCADE)
@@ -96,3 +96,14 @@ class Padres(models.Model):
 
         def __str__(self):
             return self.usuario.ci_ruc
+
+class Representante(models.Model):
+	representante = models.ForeignKey(Padres, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
+
+	class Meta:
+		verbose_name = "Representante"
+		verbose_name_plural = "Representantes"
+
+	def __str__(self):
+	    return self.user.username

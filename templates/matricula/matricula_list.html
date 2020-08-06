@@ -34,6 +34,7 @@
                   <th>Paralelo</th>
                   <th>Observación</th>
                   <th>Fecha de solicitud</th>
+                  <th>Certificado de Matricula</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -50,9 +51,15 @@
                     <td>{{ matricula.observacion }} </td>
                     <td>{{ matricula.fecha }} </td>
                     <td>
+                      {% if matricula.matricula_aceptada == True %}
                       <a href="{% url 'matricula:certificado_matricula' matricula.pk %}" type='GET'>
     											<span class="btn btn-primary btn-xs glyphicon glyphicon-list-alt" aria-hidden="true" title="Certificado de matrícula"></span>
     										</a>
+                        {% else %}
+                        Su matrícula aun no es aceptada.
+                        {% endif %}
+                      </td>
+                      <td>
                       <a href="{% url 'matricula:matricula_detail' matricula.pk %}" type='GET'>
     											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
     										</a>

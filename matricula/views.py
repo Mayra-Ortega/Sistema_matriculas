@@ -9,29 +9,40 @@ from django.views.generic.list import ListView
 def matricula_create(request):
     print(Matricula.objects.all())
     user = User.objects.get(username = request.user)
-    estudiante = Estudiante.objects.get(user=user)
+    try:
+        estudiante = Estudiante.objects.get(user=user)
+        hay_estudiante = True
+    except Exception as e:
+        hay_estudiante = False
     ciclo_actual = CicloLectivo.objects.get(ciclo_actual = True)
     paralelos = Paralelo.objects.all()
     form_matricula = MatriculaForm()
-    if request.method == 'POST':
-        form_matricula = MatriculaForm(request.POST)
-        if form_matricula.is_valid():
-            matricula = form_matricula.save(commit=False)
-            matricula.estudiante = estudiante
-            matricula.ciclo_lectivo = ciclo_actual
-            matricula.save()
-            messages.info(request, "Tú solicitud de matrícula fue creada con éxito")
-            return redirect('index')
-        else:
-            messages.error(request, institucion.errors)
-            context = {
-                'form_matricula': form_matricula,
-                'paralelos': paralelos,
-            }
-    context = {
-        'form_matricula': form_matricula,
-        'paralelos': paralelos,
-    }
+    if hay_estudiante == True:
+        if request.method == 'POST':
+            form_matricula = MatriculaForm(request.POST)
+            if form_matricula.is_valid():
+                matricula = form_matricula.save(commit=False)
+                matricula.estudiante = estudiante
+                matricula.ciclo_lectivo = ciclo_actual
+                matricula.save()
+                messages.info(request, "Tú solicitud de matrícula fue creada con éxito")
+                messages.info(request, "Le recordamos que el paralelo seleccionado, no es definitivo y puede ser cambiado por la persona encargada de reubicar los alumnos de la manera más pertinente")
+                return redirect('index')
+            else:
+                messages.error(request, institucion.errors)
+                context = {
+                    'form_matricula': form_matricula,
+                    'paralelos': paralelos,
+                }
+        context = {
+            'form_matricula': form_matricula,
+            'paralelos': paralelos,
+            'hay_estudiante': hay_estudiante,
+        }
+    else:
+        context = {
+            'hay_estudiante': hay_estudiante,
+        }
     return render(request, 'matricula/matricula_form.html', context)
 
 def matricula_edit(request, pk):

@@ -19,15 +19,19 @@
                                   <form  method="POST"  enctype="multipart/form-data">
                                     <span class="section">Información de la Madre</span>
                                       {% csrf_token %}
-                                      {% bootstrap_form form_usuario layout='horizontal' %}
-                                      {% bootstrap_form form_madre layout='horizontal' %}
-                                        <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-success">Guardar</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      {% if hay_estudiante == True %}
+                                        {% bootstrap_form form_usuario layout='horizontal' %}
+                                        {% bootstrap_form form_madre layout='horizontal' %}
+                                          <div class="ln_solid">
+                                              <div class="form-group">
+                                                  <div class="col-md-6 offset-md-3">
+                                                      <button type='submit' class="btn btn-success">Guardar</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          {% else %}
+                                            <h2>Para acceder a este menu debes primero completar tus datos</h2>
+                                          {% endif %}
                                     </form>
                                 </div>
                             </div>

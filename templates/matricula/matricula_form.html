@@ -19,7 +19,8 @@
                                   <form  method="POST"  enctype="multipart/form-data">
                                     <span class="section">Información de la matricula</span>
                                       {% csrf_token %}
-                                      {% bootstrap_form form_matricula layout='horizontal' %}
+                                      {% if hay_estudiante == True %}
+                                        {% bootstrap_form form_matricula layout='horizontal' %}
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
@@ -28,6 +29,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% else %}
+                                          <h2>Para acceder a este menu debes primero completar tus datos</h2>
+                                        {% endif %}
                                     </form>
                                 </div>
                             </div>
