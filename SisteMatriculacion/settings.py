@@ -80,21 +80,15 @@ WSGI_APPLICATION = 'SisteMatriculacion.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-<<<<<<< HEAD
-# Configuración de la conexión con la base de datos
-=======
 
->>>>>>> 3ece6bbaee47f3db52651f10aeefd3ff435ee779
+# Configuración de la conexión con la base de datos
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sistematriculacion',
         'USER': 'postgres',
-<<<<<<< HEAD
         'PASSWORD': 'admin123',
-=======
-        'PASSWORD': 'admin123', #PW JORGE
->>>>>>> 3ece6bbaee47f3db52651f10aeefd3ff435ee779
         'HOST': 'localhost',
         'PORT': '5432',
 
