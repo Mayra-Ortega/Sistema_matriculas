@@ -66,11 +66,8 @@ class Paralelo(models.Model):
 		verbose_name_plural = "Paralelos"
 
 	def __str__(self):
-<<<<<<< HEAD
+
 		return "%s %s" %(self.nombre, self.curso.nombre)
-=======
-		return self.nombre
->>>>>>> 3ece6bbaee47f3db52651f10aeefd3ff435ee779
 
 
 class PreguntaFrecuente(models.Model):
