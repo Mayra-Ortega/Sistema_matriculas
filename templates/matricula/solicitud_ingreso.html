@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>Form Upload </h3> -->
+      </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+          <img src="{% static 'images/logomineduc.png' %}" class="float" alt="..." width="200" height="100" >
+            <img align="right" src="{% static 'images/logo_sanjuanbautista.jpeg' %}" class="float" alt="..." width="100" height="100" >
+            <h2 align="center">DIÓCESIS DE LOJA</h2>
+            <h2 align="center">UNIDAD EDUCATIVA FISCOMISIONAL "SAN JUAN BAUTISTA"</h2>
+            <p align="center">San José - Catamayo - Loja - Ecuador</p>
+            <p align="center">Telefax: 2558 - 198</p>
+            <br/>
+            <p align="right">Catamayo, a 23 de Agosto del 2020</p>
+            <div class="clearfix"></div>
+          <div class="x_content">
+            <h3  align="center"><strong>SOLICITUD DE INGRESO</strong></h3>
+            <br/>
+            <p>Padre Mgs.</p>
+            <p>Cipriano Agustín Carrión Armijos</p>
+            <p>RECTOR DE LA UNIDAD EDUCATIVA FISCOMISIONAL "SAN JUAN BAUTISTA"</p>
+            <p>Catamayo</p>
+            <br />
+            <br />
+            <p>Señor Rector:</p>
+            <p>   Yo, Yelena Del Cisne Negron Guillin Representante legal del señor (srta.) estudiante
+                Jorge Robles, me dirijo a usted para solicitarle muy comedidamente se digne aceptar a
+                mi representado para que ingrese al tercero de Basica del paralelo A de la institucion
+                de su regencia, en el presente Año Lectivo 2018-2019.
+            </p>
+            <br />
+            <p>La presente matricula corresponde a</p>
+            <p>TIPO DE MATRICULA</p>
+            <p>ORDINARIA</p>
+            <P>VIENE DE OTRA INSTITUCIÓN</p>
+            <p>No<p/>
+            <br />
+            <p>Por la favorable atencion que de a la presente le antisipo mis debidos agradecimientos</p>
+            <br />
+            <p align = "center">Muy Atentamente</p>
+            <p align = "center">----------------</p>
+            <p align = "center">REPRESENTANTE</p>
+            <p align = "center">C.C. 1105083990</p>
+            <br />
+            <br />
+            <p>Analizada la petición que antedece y por considerarla legar, se aprueba lo solicitado.</p>
+            <p>Catamayo, a 23 de Agosto del 2020</p>
+            <br />
+            <br />
+            <p align = "center">Padre Mgs. Cipriano A. Carrión</p>
+            <p align = "center">RECTOR</p>
+          </div>
+
+        </div>
+        <a type="button" onclick="javascript:window.print()" type='GET'>
+            <span class="btn btn-primary btn-xs glyphicon glyphicon-print" aria-hidden="true" title="Imprimir"></span>
+          </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+{% endblock content %}

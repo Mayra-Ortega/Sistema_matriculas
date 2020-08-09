@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Matricúlate</h3>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                  <form  method="POST"  enctype="multipart/form-data">
+                                    <span class="section">Información de la matricula</span>
+                                      {% csrf_token %}
+                                      {% if hay_estudiante == True %}
+                                        {% bootstrap_form form_matricula layout='horizontal' %}
+                                        <div class="ln_solid">
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-success">Guardar</button>
+                                                    <a href="{% url 'institucion:ciclo_list' %}" class="btn btn-primary">Cancelar</a
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                          <h2>Para acceder a este menu debes primero completar tus datos</h2>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock content %}
+{% block javascripts %}
+{{ block.super }}
+<script type="text/javascript">
+  function filtrarParalelos(elemento){
+    cursoId = parseInt(elemento.value)
+
+    select_paralelo = document.getElementById('choice_paralelo')
+    select = select_paralelo.parentElement.childNodes[0]
+    rango = select.options.length
+      // Eliminamos las opciones del select
+      for (let a = rango-1; a > 0; a--) {
+        select.options[a].remove()
+      }
+      // Agregamos las nuevas opciones del select
+        {% for paralelo in paralelos %}
+          if ({{paralelo.curso.pk}} == cursoId){
+            let option = document.createElement("option")
+            option.text = "{{paralelo.nombre}}"
+            option.value = {{paralelo.id}}
+            select.appendChild(option)
+          }
+        {% endfor %}
+      //
+    // console.log(select_paralelo.parentElement.childNodes[0].children[1])
+  }
+</script>
+{% endblock javascripts %}
