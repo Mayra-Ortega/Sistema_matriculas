@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load bootstrap4 %}
+{% load user_tags %}
 
 {% block content %}
             <div class="right_col" role="main">
@@ -25,7 +26,10 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-success">Guardar</button>
-                                                    <a href="{% url 'matricula:matriculas_pendientes_list' %}" class="btn btn-primary">Cancelar</a
+                                                    {{ user|get_rol }}
+                                                    {% if user|get_rol == "Estudiante" %}
+                                                      <a href="{% url 'matricula:matriculas_pendientes_list' %}" class="btn btn-primary">Cancelar</a
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

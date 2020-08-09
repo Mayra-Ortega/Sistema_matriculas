@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from usuarios.forms import *
 from django.contrib import messages
 
+def get_user(request):
+    user = User.objects.get(username = request.user)
+    return user
 # Create your views here.
 def mis_datos(request):
     form_usuario = UsuarioForm()
@@ -28,6 +31,14 @@ def mis_datos(request):
         'form_estudiante': form_estudiante,
     }
     return render(request, 'usuario/mis_datos.html', context)
+
+def mis_datos_list(request):
+    user = get_user(request)
+    mis_datos = Estudiante.objects.filter(user=user)
+    context = {
+        'mis_datos': mis_datos,
+    }
+    return render(request, 'matricula/mis_datos_list.html', context)
 
 def datos_madre(request):
     form_usuario = UsuarioForm()

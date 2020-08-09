@@ -7,6 +7,7 @@ from usuarios import views
 
 urlpatterns = [
     path(r'mis_datos', views.mis_datos, name='mis_datos'),
+    path(r'mis_datos_list', views.mis_datos_list, name='mis_datos_list'),
     path(r'datos_madre', views.datos_madre, name='datos_madre'),
     path(r'datos_padre', views.datos_padre, name='datos_padre'),
     path(r'datos_representante', views.datos_representante, name='datos_representante'),

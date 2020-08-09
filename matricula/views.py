@@ -14,7 +14,7 @@ def matricula_create(request):
         estudiante = Estudiante.objects.get(user=user)
         hay_estudiante = True
     except Exception as e:
-        hay_estudiante = True
+        hay_estudiante = False
     ciclo_actual = CicloLectivo.objects.get(ciclo_actual = True)
     paralelos = Paralelo.objects.all()
     form_matricula = MatriculaForm()
@@ -70,7 +70,23 @@ def matricula_edit(request, pk):
     return render(request, 'matricula/matricula_form.html', context)
 
 class MatriculaList(ListView):
-	model = Matricula
+    model = Matricula
+    def get_context_data(self):
+        queryset = super(MatriculaList, self).get_queryset()
+        user = User.objects.get(username = self.request.user)
+        ciclo_lectivo = CicloLectivo.objects.get(ciclo_actual=True)
+        try:
+            estudiante = Estudiante.objects.get(user=user)
+            hay_matricula = Matricula.objects.filter(estudiante = estudiante, ciclo_lectivo = ciclo_lectivo)
+            nro_matriculas = hay_matricula.count()
+        except Exception as e:
+            nro_matriculas = 0
+            hay_matricula = None
+        context = {
+            'nro_matriculas': nro_matriculas,
+            'hay_matricula': hay_matricula,
+        }
+        return context
 
 class MatriculaDetail(DetailView):
 	model = Matricula
