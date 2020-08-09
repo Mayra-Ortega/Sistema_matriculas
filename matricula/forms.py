@@ -9,6 +9,8 @@ class MatriculaForm(forms.ModelForm):
         ciclo_actual = CicloLectivo.objects.get(ciclo_actual = True)
         cursos = Curso.objects.filter(ciclo_lectivo = ciclo_actual)
         self.fields['curso'].queryset = cursos
+        paralelos = Paralelo.objects.filter(curso__ciclo_lectivo = ciclo_actual)
+        self.fields['paralelo'].queryset = paralelos
     class Meta:
         model = Matricula
         fields = (

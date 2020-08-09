@@ -11,6 +11,10 @@ class CicloForm(forms.ModelForm):
     class Meta:
         model = CicloLectivo
         fields = '__all__'
+        widgets = {
+			'inicio': forms.DateInput(attrs = {'type':'Date'}),
+			'fin': forms.DateInput(attrs = {'type':'Date'}),
+		}
 
 class CursoForm(forms.ModelForm):
     class Meta:

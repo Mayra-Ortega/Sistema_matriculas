@@ -54,6 +54,11 @@ def ciclo_create(request):
     if request.method == 'POST':
         form_ciclo = CicloForm(request.POST)
         if form_ciclo.is_valid():
+            #Todos los ciclos anteriores dejan de ser los actuales
+            ciclos_anteriores = CicloLectivo.objects.all()
+            for ciclo_anterior in ciclos_anteriores:
+                ciclo_anterior.ciclo_actual = False
+                ciclo_anterior.save()
             ciclo = form_ciclo.save()
             institucion_ciclo = InstitucionCicloLectivo.objects.create(institucion=institucion, ciclo_lectivo=ciclo)
             return redirect('institucion:ciclo_list')
@@ -68,6 +73,11 @@ def ciclo_edit(request, pk):
     if request.method == 'POST':
         form_ciclo = CicloForm(request.POST, instance = ciclo)
         if form_ciclo.is_valid():
+            #Todos los ciclos anteriores dejan de ser los actuales
+            ciclos_anteriores = CicloLectivo.objects.all()
+            for ciclo_anterior in ciclos_anteriores:
+                ciclo_anterior.ciclo_actual = False
+                ciclo_anterior.save()
             form_ciclo.save()
             messages.info(request, "El ciclo se editó con éxito")
             return redirect('institucion:ciclo_list')

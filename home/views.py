@@ -8,22 +8,37 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from institucion.models import *
 from usuarios.models import *
+from matricula.models import *
 
 
 # Create your views here.
 def index(request):
     user = User.objects.get(username = request.user)
-    try:
-        usuario = Estudiante.objects.get(user=user)
-    except Exception as e:
-        usuario = "null"
     preguntas = PreguntaFrecuente.objects.all()
     rol = user.groups.all().first()
+    # consultamos el numero de estudiantes
+    estudiantes = Estudiante.objects.all().count()
+    # consultamos el numero de estudiantes matriculados
+    matriculados = Matricula.objects.filter(matricula_aceptada=True).count()
+    # consultamos el numero de estudiantes con matricula pendiente
+    matriculas_pendientes = Matricula.objects.filter(matricula_aceptada=False).count()
+    # consultamos el numero de cursos
+    cursos = Curso.objects.all().count()
+    # consultamos el numero de Paralelos
+    paralelos = Paralelo.objects.all().count()
+    # consultamos el numero de usuarios
+    usuarios = User.objects.all().count()
+
     context = {
                 'user': user,
                 'rol': rol,
                 'preguntas': preguntas,
-                'usuario': usuario,
+                'estudiantes': estudiantes,
+                'matriculados': matriculados,
+                'matriculas_pendientes': matriculas_pendientes,
+                'cursos': cursos,
+                'paralelos': paralelos,
+                'usuarios': usuarios,
             }
     return render(request, 'index.html', context)
     # Landing page de cada empresa

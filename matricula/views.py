@@ -14,7 +14,7 @@ def matricula_create(request):
         estudiante = Estudiante.objects.get(user=user)
         hay_estudiante = True
     except Exception as e:
-        hay_estudiante = False
+        hay_estudiante = True
     ciclo_actual = CicloLectivo.objects.get(ciclo_actual = True)
     paralelos = Paralelo.objects.all()
     form_matricula = MatriculaForm()
@@ -49,6 +49,7 @@ def matricula_create(request):
 def matricula_edit(request, pk):
     matricula = Matricula.objects.get(pk=pk)
     form_matricula = MatriculaForm(instance = matricula)
+    hay_estudiante = True
     if request.method == 'POST':
         form_matricula = MatriculaForm(request.POST, instance = matricula)
         if form_matricula.is_valid():
@@ -64,6 +65,7 @@ def matricula_edit(request, pk):
 
     context = {
         'form_matricula': form_matricula,
+        'hay_estudiante': hay_estudiante,
     }
     return render(request, 'matricula/matricula_form.html', context)
 
@@ -112,7 +114,8 @@ def form_estudiantes_filter(request):
         curso = request.POST.get('curso')
         paralelo = request.POST.get('paralelo')
 
-        matriculas = Matricula.objects.all()
+        matriculas = Matricula.objects.filter(matricula_aceptada=True)
+        estudiante = matriculas.first()
 
         if request.POST.get('ciclo_lectivo'):
             matriculas = matriculas.filter(ciclo_lectivo_id = ciclo)
@@ -122,7 +125,8 @@ def form_estudiantes_filter(request):
             matriculas = matriculas.filter(paralelo_id = paralelo)
 
         context = {
-            'result_estudiantes_filter': matriculas
+            'result_estudiantes_filter': matriculas,
+            'estudiante': estudiante,
         }
         return render(request, 'matricula/list_estudiantes_filter.html', context)
     context = {
