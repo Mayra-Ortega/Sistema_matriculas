@@ -2,6 +2,7 @@
 <html lang="en">
     {% load static %}
     {% load bootstrap4 %}
+    {% load user_tags %}
     {% block head %}
 <head>
     {% block meta %}
@@ -64,12 +65,12 @@
           <div class="profile clearfix">
             <div class="profile_pic">
 
-              <img src="{% static 'images/img.jpg' %}" alt="..." class="img-circle profile_img">
+              <img src="{% static 'images/logo_sanjuanbautista.jpeg' %}" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Bienvenido:</span>
               <h2>{{ user }}</h2>
-              <h2>{{ rol }}</h2>
+              <h2>{{ user|get_rol }}</h2>
 
             </div>
           </div>
@@ -81,6 +82,7 @@
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
+                {% if user|has_group:"Secretaria" or user|has_group:"SuperAdmin" %}
               <h3>Secretaría</h3>
               <li><a><i class="fa fa-newspaper-o"></i> Matriculas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -99,7 +101,8 @@
                   <li><a href="{% url 'institucion:pregunta_list' %}">Preguntas frecuentes</a></li>
                 </ul>
               </li>
-
+              {% endif %}
+              {% if user|has_group:"Estudiante" or user|has_group:"SuperAdmin"%}
               <h3>Estudiante</h3>
               <li><a><i class="fa fa-folder-open-o"></i> Matrículas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -110,14 +113,15 @@
                   <li><a href="{% url 'usuarios:datos_representante' %}"> Datos del Representante</a></li>
                 </ul>
               </li>
-
-
+              {% endif %}
+              {% if user|has_group:"Representante" or user|has_group:"SuperAdmin"%}
               <h3>Representante</h3>
               <li><a><i class="fa fa-folder-open-o"></i> Solicitudes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{% url 'matricula:solicitud_ingreso_create' %}">Solicitud de ingreso</a></li>
                 </ul>
               </li>
+              {% endif %}
               </ul>
             </div>
 
