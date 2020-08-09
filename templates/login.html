@@ -29,17 +29,29 @@
       <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
+
         <div class="animate form login_form">
+          <div>
+            <div class="col-md-12 col-sm-12">
+              <img src="{% static 'images/logo_sanjuanbautista.jpeg' %}" alt="..." class="img-circle profile_img">
+            </div>
+            <div   align="center" class="col-md-12 col-sm-12">
+              <strong><p>UNIDAD EDUCATIVA FISCOMISIONAL</p></strong>
+            <strong><p>"SAN JUAN BAUTISTA"</p></strong>
+          </div>
+          </div>
           <section class="login_content">
             <form method="POST" enctype="multipart/form-data">
+              <div   align="center" class="col-md-12 col-sm-12">
               <h1>Iniciar Sesión</h1>
+            </div>
               {% csrf_token %}
               {% bootstrap_form form_login layout='inline' %}
 
 
                 <button class="btn btn-sm btn-success" type="submit">
                   <i class="fa fa-dot-circle-o"></i>  Iniciar Sesion</button>
-                <a class="reset_pass" href="#">Olvidaste tu contraseña</a>
+                <!-- <a class="reset_pass" href="#">Olvidaste tu contraseña</a> -->
 
               <div class="clearfix"></div>
 
@@ -51,19 +63,28 @@
                 <div class="clearfix"></div>
                 <br />
 
-                <div>
-                  <h1><i class="fa fa-university"></i>Sistema de Matrículas</h1>
-                  <p>Unidad Educativa Fiscomosional San Juan Bautista</p>
-                </div>
+                <h1><i class="fa fa-university"></i>Sistema de Matrículas</h1>
+
               </div>
             </form>
           </section>
         </div>
 
         <div id="register" class="animate form registration_form">
+          <div>
+            <div class="col-md-12 col-sm-12">
+              <img src="{% static 'images/logo_sanjuanbautista.jpeg' %}" alt="..." class="img-circle profile_img">
+            </div>
+            <div   align="center" class="col-md-12 col-sm-12">
+              <strong><p>UNIDAD EDUCATIVA FISCOMISIONAL</p></strong>
+            <strong><p>"SAN JUAN BAUTISTA"</p></strong>
+          </div>
+          </div>
           <section class="login_content">
             <form  method="POST" action="{% url 'login' %}" id="register" enctype="multipart/form-data">
-              <h1>Registrarse</h1>
+              <div   align="center" class="col-md-12 col-sm-12">
+              <h1>Regístrate</h1>
+            </div>
                 {% csrf_token %}
                 {% bootstrap_form form_register layout='inline' %}
                 <input type="hidden" name="is_register" value="" id="is_register" >
@@ -82,11 +103,6 @@
 
                 <div>
                   <h1><i class="fa fa-university"></i>Sistema de Matrículas</h1>
-<<<<<<< HEAD
-                  <p>Unidad Educativa Fiscomosional San Juan Bautista</p>
-=======
-                  <p>Escuela San Juan Bautista</p>
->>>>>>> 3ece6bbaee47f3db52651f10aeefd3ff435ee779
                 </div>
               </div>
             </form>
