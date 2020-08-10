@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="right_col" role="main">
+  <div id="bootstrap_messages" style="margin-top:5em;">
+    {% bootstrap_messages %}
+  </div>
+  <div class="">
+    <div class="page-title">
+
+
+      <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h3>Datos de Padres</h3>
+          </div>
+          {% if hay_estudiante == True %}
+          {% if hay_datos_padre <= 0  %}
+            <a href="{% url 'usuarios:datos_padre' %}" type='GET'>
+              <span class="btn btn-success btn-xs glyphicon glyphicon-pencil" aria-hidden="true" title="Ingresar datos del padre"> Datos Padre</span>
+            </a>
+          {% endif %}
+          {% if hay_datos_madre <= 0  %}
+            <a href="{% url 'usuarios:datos_madre' %}" type='GET'>
+              <span class="btn btn-success btn-xs glyphicon glyphicon-pencil" aria-hidden="true" title="Ingresar datos de la madre"> Datos Madre</span>
+            </a>
+          {% endif %}
+          {% if hay_user_representante == False %}
+          <a href="{% url 'usuarios:datos_representante' %}" type='GET'>
+            <span class="btn btn-success btn-xs glyphicon glyphicon-pencil" aria-hidden="true" title="Ingresar datos del representante"> Datos Representante</span>
+          </a>
+          {% endif %}
+          <div class="x_content">
+            <div class="clearfix"></div>
+
+              <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Cédula</th>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Dirección</th>
+                  <th>Telefono</th>
+                  <th>Es Representante</th>
+                  <th>Parentesco</th>
+                  <th>Nivel Educacion</th>
+                  <th>Profesion</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+
+              <tbody>
+                  {% for datos in padres %}
+                  <tr>
+                    <td>{{ datos.usuario.ci_ruc }} </td>
+                    <td>{{ datos.usuario.nombres }} </td>
+                    <td>{{ datos.usuario.apellidos }} </td>
+                    <td>{{ datos.usuario.direccion  }} </td>
+                    <td>{{ datos.usuario.telefono }} </td>
+                    <td>{{ datos.is_representante }} </td>
+                    <td>{{ datos.parentesco.parentesco }} </td>
+                    <td>{{ datos.nivel_educacion }} </td>
+                    <td>{{ datos.profesion }} </td>
+                    {% if datos.parentesco.parentesco == "Padre" %}
+                      <td>
+                        <a href="{% url 'usuarios:datos_padres_detail' datos.pk %}" type='GET'>
+      											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
+      										</a>
+                        <a href="{% url 'usuarios:datos_padre_edit' datos.pk %}" type='GET'>
+      											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
+      										</a>
+                      </td>
+                    {% else %}
+                    {% if datos.parentesco.parentesco == "Madre" %}
+                      <td>
+                        <a href="{% url 'usuarios:datos_padres_detail' datos.pk %}" type='GET'>
+                            <span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
+                          </a>
+                        <a href="{% url 'usuarios:datos_madre_edit' datos.pk %}" type='GET'>
+                            <span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
+                          </a>
+                      </td>
+                    {% else %}
+                    <td>
+                      <a href="{% url 'usuarios:datos_padres_detail' datos.pk %}" type='GET'>
+                          <span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
+                        </a>
+                      <a href="{% url 'usuarios:datos_representante_edit' datos.pk %}" type='GET'>
+                          <span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
+                        </a>
+                    </td>
+                    {% endif %}
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          </div>
+      </div>
+      </div>
+      {% else %}
+        <h2>Para acceder a este menu debes primero completar tus datos</h2>
+      {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+      {% endblock content %}

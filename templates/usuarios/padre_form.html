@@ -7,7 +7,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Datos Representante</h3>
+                            <h3>Datos Padre</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -17,26 +17,22 @@
                             <div class="x_panel">
                                 <div class="x_content">
                                   <form  method="POST"  enctype="multipart/form-data">
-                                    <span class="section">Información del Representante</span>
+                                    <span class="section">Información del Padre</span>
                                       {% csrf_token %}
                                       {% if hay_estudiante == True %}
-                                        {% if hay_representante == False %}
-                                          {% bootstrap_form form_register layout='horizontal' %}
-                                          {% bootstrap_form form_usuario layout='horizontal' %}
-                                          {% bootstrap_form form_representante layout='horizontal' %}
-                                        {% else %}
-                                          {% bootstrap_form form_register layout='vertical' %}
-                                        {% endif %}
+                                        {% bootstrap_form form_usuario layout='horizontal' %}
+                                        {% bootstrap_form form_padre layout='horizontal' %}
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-success">Guardar</button>
+                                                    <a href="{% url 'usuarios:datos_padres_list' %}" class="btn btn-primary">Regresar</a>
                                                 </div>
                                             </div>
+                                            {% else %}
+                                              <h2>Para acceder a este menu debes primero completar tus datos</h2>
+                                            {% endif %}
                                         </div>
-                                        {% else %}
-                                        <h2>Para acceder a este menu debes primero completar tus datos</h2>
-                                        {% endif %}
                                     </form>
                                 </div>
                             </div>

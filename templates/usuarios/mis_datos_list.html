@@ -16,11 +16,11 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h3>Mi Matricula</h3>
+            <h3>Mi Datos</h3>
           </div>
-          {% if nro_matriculas <= 1  %}
-            <a href="{% url 'matricula:matricula_create' %}" type='GET'>
-              <span class="btn btn-success btn-xs glyphicon glyphicon-plus" aria-hidden="true" title="matriculate"> Generar Matricula</span>
+          {% if hay_datos <= 0  %}
+            <a href="{% url 'usuarios:mis_datos' %}" type='GET'>
+              <span class="btn btn-success btn-xs glyphicon glyphicon-plus" aria-hidden="true" title="matriculate">Ingresar Datos</span>
             </a>
           {% endif %}
           <div class="x_content">
@@ -48,14 +48,19 @@
               <tbody>
                   {% for datos in mis_datos %}
                   <tr>
-                    <td>{{ datos.ci_ruc }} </td>
-                    <td>{{ datos.nombres }} </td>
-                    <td>{{ datos.apellidos }} </td>
-                    <td>{{ datos.direccion  }} </td>
-                    <td>{{ datos.telefono }} </td>
+                    <td>{{ datos.usuario.ci_ruc }} </td>
+                    <td>{{ datos.usuario.nombres }} </td>
+                    <td>{{ datos.usuario.apellidos }} </td>
+                    <td>{{ datos.usuario.direccion  }} </td>
+                    <td>{{ datos.usuario.telefono }} </td>
                     <td>{{ datos.f_nacimiento }} </td>
                     <td>{{ datos.lugar_nacimiento }} </td>
-                    <td>{{ datos.img_perfil }} </td>
+                    <td>
+                      <div class="thumb">
+                        <img src="{{ datos.img_perfil.url }}" width="75" height="85" alt="{{ datos.img_perfil }}"
+                          style="border-radius: 1em !important;">
+                      </div>
+                    </td>
                     <td>
                       <a href="{% url 'usuarios:mis_datos_detail' datos.pk %}" type='GET'>
     											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Detalle de tud datos.</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_content">
+
+                          <h2>
+                              <strong>Cedula:</strong>
+                              <spam>{{object.usuario.ci_ruc}}</spam>
+                          </h2>
+                          <h2>
+                              <strong>Nombres:</strong>
+                              <span>{{ object.usuario.nombres }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Apellidos:</strong>
+                              <span>{{ object.usuario.apellidos }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Teléfono:</strong>
+                              <span>{{ object.usuario.telefono }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Fecha de Nacimiento:</strong>
+                              <span>{{ object.f_nacimiento }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Dirección:</strong>
+                              <span>{{ object.usuario.direccion }}</span>
+                          </h2>
+                          <h2>
+                              <strong>Lugar de Nacimiento</strong>
+                          </h2>
+                          <h2>
+                              <strong>Foto</strong>
+                              <img src="{{ object.img_perfil.url }}" width="75" height="85" alt="{{ object.img_perfil }}"
+                                style="border-radius: 1em !important;">
+
+                          </h2>
+                          <div style="display: flex; justify-content: center;">
+                              <a href="{% url 'usuarios:mis_datos_list' %}" class="btn btn-primary">Regresar</a>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

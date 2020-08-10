@@ -107,10 +107,8 @@
               <li><a><i class="fa fa-folder-open-o"></i> Matrículas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{% url 'matricula:matricula_list' %}">Mi Matrícula</a></li>
-                  <li><a href="{% url 'usuarios:mis_datos' %}">Mis datos</a></li>
-                  <li><a href="{% url 'usuarios:datos_padre' %}">Datos del Padre</a></li>
-                  <li><a href="{% url 'usuarios:datos_madre' %}">Datos de la Madre</a></li>
-                  <li><a href="{% url 'usuarios:datos_representante' %}"> Datos del Representante</a></li>
+                  <li><a href="{% url 'usuarios:mis_datos_list' %}">Mis datos</a></li>
+                  <li><a href="{% url 'usuarios:datos_padres_list' %}">Datos Generales</a></li>
                 </ul>
               </li>
               {% endif %}
