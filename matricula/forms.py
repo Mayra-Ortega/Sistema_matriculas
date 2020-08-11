@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
 from institucion.models import *
-
 class MatriculaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MatriculaForm, self).__init__(*args, **kwargs)
@@ -54,17 +53,19 @@ class SolicitudIngresoForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(SolicitudIngresoForm, self).__init__(*args, **kwargs)
         usuario = User.objects.get(username = request.user)
-        representante = Representante.objects.get(user=usuario)
         ciclo_lectivo = CicloLectivo.objects.get(ciclo_actual = True)
         self.fields['ciclo_lectivo'].initial = ciclo_lectivo
         cursos = Curso.objects.filter(ciclo_lectivo = ciclo_lectivo)
         self.fields['curso'].queryset = cursos
         paralelos = Paralelo.objects.filter(curso__ciclo_lectivo = ciclo_lectivo)
         self.fields['paralelo'].queryset = paralelos
-        estudiantes = Padres.objects.filter(is_representante = True, padres_set__representante = representante )
-        print(estudiantes)
-        matriculas = Matricula.objects.filter(ciclo_lectivo = ciclo_lectivo)
-        representante_estudiante = Padres.objects.get(estudiante = representante_set__representante)
-        estudiantes = Estudiante.objects.filter(estudiante = matriculas.estudiante)
-        representados = Representante.objects.filter(user = representante, representante__padres_estudiante = estudiantes)
-        # self.fields['estudiante'].queryset = representados
+        estudiantes = Estudiante.objects.all()
+        representados = { }
+        for estudiante in estudiantes:
+            representante = Representante.objects.filter(user = usuario, representante__padres_estudiante = estudiante)
+            if representante != []:
+                representados = estudiante
+                print(representados)
+
+        estudiantes_representante = Estudiante.objects.filter(pk=representados.pk)
+        self.fields['estudiante'].queryset = estudiantes_representante

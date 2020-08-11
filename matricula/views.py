@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from usuarios.models import *
+from usuarios.views import get_user
 from django.contrib import messages
+from datetime import date
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -157,7 +159,58 @@ def solicitud_ingreso(request):
 
 def solicitud_ingreso_create(request):
     form_solicitud_ingreso = SolicitudIngresoForm(request)
+    user = get_user(request)
+    representante = Representante.objects.get(user = user)
+    rector = User.objects.get(groups__name = 'Rector')
+    print(rector)
+    if request.method == 'POST':
+        form_solicitud_ingreso = SolicitudIngresoForm(request, request.POST)
+        if form_solicitud_ingreso.is_valid():
+            solicitud = form_solicitud_ingreso.save(commit = False)
+            solicitud.representante = representante
+            solicitud.rector = rector
+            solicitud.save()
+            messages.info(request, "La solicitud se envio con éxito")
+            return redirect('matricula:solicitud_ingreso_list')
     context = {
         'form_solicitud_ingreso': form_solicitud_ingreso,
     }
     return render(request, 'matricula/solicitud_form.html', context)
+
+def solicitud_ingreso_list(request):
+    user = get_user(request)
+    representante = Representante.objects.get(user = user)
+    solicitudes = SolicitudIngreso.objects.filter(representante=representante)
+    context = {
+        'solicitudes':solicitudes
+    }
+    return render(request, 'matricula/solicitudes_list.html', context)
+
+def solicitudes_pendientes_list(request):
+    solicitudes = SolicitudIngreso.objects.filter(aprobacion = False)
+    context = {
+        'solicitudes':solicitudes
+    }
+    return render(request, 'matricula/solicitudes_pendientes_list.html', context)
+
+def solicitudes_aprobadas_list(request):
+    solicitudes = SolicitudIngreso.objects.filter(aprobacion = True)
+    context = {
+        'solicitudes':solicitudes
+    }
+    return render(request, 'matricula/solicitudes_pendientes_list.html', context)
+
+def aprobar_solicitud(request, pk):
+    solicitud = SolicitudIngreso.objects.get(pk=pk)
+    solicitud.aprobacion = True
+    solicitud.f_aceptacion = date.today()
+    solicitud.save()
+    messages.info(request, "La solicitud se aprobo con éxito")
+    return redirect('matricula:solicitudes_pendientes_list')
+
+def ver_solicitud(request, pk):
+    solicitud = SolicitudIngreso.objects.get(pk=pk)
+    context = {
+        'solicitud':solicitud
+    }
+    return render(request, 'matricula/solicitud_ingreso.html', context)

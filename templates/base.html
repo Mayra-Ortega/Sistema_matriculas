@@ -87,8 +87,9 @@
               <li><a><i class="fa fa-newspaper-o"></i> Matriculas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{% url 'matricula:matriculas_pendientes_list' %}">Matriculas pendientes</a></li>
-                  <li><a href="index2.html">Solicitudes de Ingreso</a></li>
+                  <li><a href="{% url 'matricula:solicitudes_pendientes_list' %}">Solicitudes de Ingreso</a></li>
                   <li><a href="{% url 'matricula:matriculados_list' %}">Matriculados</a></li>
+                  <li><a href="{% url 'matricula:solicitudes_aprobadas_list' %}">Solicitudes aprobadas</a></li>
                   <li><a href="{% url 'matricula:form_estudiantes_filter' %}">Lista de estudiantes</a></li>
                 </ul>
               </li>
@@ -117,6 +118,7 @@
               <li><a><i class="fa fa-folder-open-o"></i> Solicitudes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="{% url 'matricula:solicitud_ingreso_create' %}">Solicitud de ingreso</a></li>
+                  <li><a href="{% url 'matricula:solicitud_ingreso_list' %}">Lista de solicitudes</a></li>
                 </ul>
               </li>
               {% endif %}

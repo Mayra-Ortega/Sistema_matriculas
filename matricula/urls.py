@@ -23,4 +23,9 @@ urlpatterns = [
     # Solicitud de ingreso
     path(r'solicitud_ingreso_create/', views.solicitud_ingreso_create, name = 'solicitud_ingreso_create'),
     path(r'solicitud_ingreso/', views.solicitud_ingreso, name = 'solicitud_ingreso'),
+    path(r'solicitud_ingreso_list/', views.solicitud_ingreso_list, name = 'solicitud_ingreso_list'),
+    path(r'solicitudes_pendientes_list/', views.solicitudes_pendientes_list, name = 'solicitudes_pendientes_list'),
+    path(r'solicitudes_aprobadas_list/', views.solicitudes_aprobadas_list, name = 'solicitudes_aprobadas_list'),
+    path(r'aprobar_solicitud//<int:pk>/', views.aprobar_solicitud, name = 'aprobar_solicitud'),
+    path(r'ver_solicitud//<int:pk>/', views.ver_solicitud, name = 'ver_solicitud'),
 ]

@@ -19,7 +19,7 @@ class Usuario(models.Model):
 		verbose_name_plural = "Usuarios"
 
 	def __str__(self):
-		return self.nombres
+		return "%s %s" %(self.nombres, self.apellidos)
 
 class Estudiante(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario')
