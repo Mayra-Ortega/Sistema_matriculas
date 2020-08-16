@@ -44,10 +44,10 @@
                   {% for matricula in matriculas %}
                   <tr>
                     <td>{{ matricula.id }} </td>
-                    <td>{{ matricula.estudiante }} </td>
+                    <td>{{ matricula.estudiante.usuario.apellidos }} {{ matricula.estudiante.usuario.nombres }} </td>
                     <td>{{ matricula.ciclo_lectivo }} </td>
                     <td>{{ matricula.curso }} </td>
-                    <td>{{ matricula.paralelo }} </td>
+                    <td>{{ matricula.paralelo.nombre }} </td>
                     <td>{{ matricula.observacion }} </td>
                     <td>{{ matricula.fecha }} </td>
                     <td><a href="{% url 'matricula:matricula_aprobacion' matricula.pk %}" type='GET'>

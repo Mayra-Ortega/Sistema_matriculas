@@ -25,11 +25,13 @@
                                           {% bootstrap_form form_usuario layout='horizontal' %}
                                           {% bootstrap_form form_representante layout='horizontal' %}
                                         {% else %}
+                                        <h2><font color="red"> Si tú representante ya tiene una cuenta, no es necesario crearla, con ella puede realizar
+                                        la solicitud de ingreso de sus dos representados</font></h2>
                                           {% bootstrap_form form_register layout='vertical' %}
                                         {% endif %}
                                         <div class="ln_solid">
                                             <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
+                                                <div class="col-md-12 offset-md-2">
                                                     <button type='submit' class="btn btn-success">Guardar</button>
                                                     <a href="{% url 'usuarios:datos_padres_list' %}" class="btn btn-primary">Regresar</a>
                                                 </div>

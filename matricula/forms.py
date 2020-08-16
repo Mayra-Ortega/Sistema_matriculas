@@ -60,12 +60,11 @@ class SolicitudIngresoForm(forms.ModelForm):
         paralelos = Paralelo.objects.filter(curso__ciclo_lectivo = ciclo_lectivo)
         self.fields['paralelo'].queryset = paralelos
         estudiantes = Estudiante.objects.all()
-        representados = { }
-        for estudiante in estudiantes:
-            representante = Representante.objects.filter(user = usuario, representante__padres_estudiante = estudiante)
-            if representante != []:
-                representados = estudiante
-                print(representados)
-
-        estudiantes_representante = Estudiante.objects.filter(pk=representados.pk)
-        self.fields['estudiante'].queryset = estudiantes_representante
+        representante = Padres.objects.get(representante_padres__user = usuario)
+        print('representante')
+        print(representante)
+        print('representante')
+        representados = Estudiante.objects.filter(padres_estudiante__usuario__ci_ruc = representante.usuario.ci_ruc, padres_estudiante__is_representante = True)
+        print(representados)
+        print('representante')
+        self.fields['estudiante'].queryset = representados

@@ -95,9 +95,9 @@
               </li>
               <li><a><i class="fa fa-building-o"></i>Institución <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
+                  <li><a href="{% url 'institucion:ciclo_list' %}">Años Lectivos</a></li>
                   <li><a href="{% url 'institucion:curso_list' %}">Cursos</a></li>
                   <li><a href="{% url 'institucion:paralelo_list' %}">Paralelos</a></li>
-                  <li><a href="{% url 'institucion:ciclo_list' %}">Años Lectivos</a></li>
                   <li><a href="{% url 'institucion:institucion_list' %}">Institución</a></li>
                   <li><a href="{% url 'institucion:pregunta_list' %}">Preguntas frecuentes</a></li>
                 </ul>
@@ -107,9 +107,9 @@
               <h3>Estudiante</h3>
               <li><a><i class="fa fa-folder-open-o"></i> Matrículas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="{% url 'matricula:matricula_list' %}">Mi Matrícula</a></li>
                   <li><a href="{% url 'usuarios:mis_datos_list' %}">Mis datos</a></li>
                   <li><a href="{% url 'usuarios:datos_padres_list' %}">Datos Generales</a></li>
+                  <li><a href="{% url 'matricula:matricula_list' %}">Mi Matrícula</a></li>
                 </ul>
               </li>
               {% endif %}

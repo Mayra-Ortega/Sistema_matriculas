@@ -43,10 +43,10 @@
                   <tr>
                     <td>{{ solicitud.id }} </td>
                     <td>{{ solicitud.representante }} </td>
-                    <td>{{ solicitud.estudiante }} </td>
+                    <td>{{ solicitud.estudiante.usuario.apellidos }} {{ solicitud.estudiante.usuario.nombres }} </td>
                     <td>{{ solicitud.ciclo_lectivo }} </td>
                     <td>{{ solicitud.curso }} </td>
-                    <td>{{ solicitud.paralelo }} </td>
+                    <td>{{ solicitud.paralelo.nombre }} </td>
                     <td>{{ solicitud.get_tipo_matricula_display }} </td>
                     <td>{{ solicitud.get_viene_otra_institucion_display }} </td>
                       <td>
