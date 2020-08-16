@@ -30,7 +30,7 @@ def matricula_create(request):
                 matricula.save()
                 messages.info(request, "Tú solicitud de matrícula fue creada con éxito")
                 messages.info(request, "Le recordamos que el paralelo seleccionado, no es definitivo y puede ser cambiado por la persona encargada de reubicar los alumnos de la manera más pertinente")
-                return redirect('index')
+                return redirect('matricula:matricula_list')
             else:
                 messages.error(request, institucion.errors)
                 context = {

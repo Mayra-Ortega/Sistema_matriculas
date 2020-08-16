@@ -95,6 +95,15 @@ def datos_madre(request):
             form_usuario = UsuarioForm(request.POST)
             form_madre = PadresForm(request.POST)
             if form_usuario.is_valid() and form_madre.is_valid():
+                # try:
+                #     usuario_existente = Usuario.objects.get(ci_ruc = form_usuario.ci_ruc)
+                #     usuario_existe = True
+                # except Exception as e:
+                #     usuario_existe = False
+                # if usuario_existe == True:
+                #     usuario_existente.padres_estudiante.add(estudiante)
+                #     messages.info(request, "Los datos de la madre del estudiante se guardaron con éxito......")
+                # else:
                 usuario = form_usuario.save()
                 madre = form_madre.save(commit=False)
                 madre.padres_estudiante = estudiante
