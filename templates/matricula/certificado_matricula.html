@@ -15,36 +15,67 @@
     <div class="clearfix"></div>
 
     <div class="row">
-      <div class="col-md-12 col-sm-12  ">
+      <div class="col-md-12 col-sm-12 " id="imprimir">
         <div class="x_panel">
             <img src="{% static 'images/logomineduc.png' %}" class="float" alt="..." width="200" height="100" >
             <img align="right" src="{% static 'images/logo_sanjuanbautista.jpeg' %}" class="float" alt="..." width="100" height="100" >
-            <h2 align="center">MINISTERIO DE EDUCACIÓN</h2>
-            <h2 align="center">DISTRITO EDUCATIVO 11D02</h2>
-            <h2 align="center">DIÓCESIS DE LOJA</h2>
+            <h3 align="center">MINISTERIO DE EDUCACIÓN</h3>
+            <h3 align="center">DISTRITO EDUCATIVO 11D02</h3>
+            <h3 align="center">DIÓCESIS DE LOJA</h3>
             <div class="clearfix"></div>
           <div class="x_content">
-            <h3  align="center">UNIDAD EDUCATIVA FISCOMISIONAL "SAN JUAN BAUTISTA"</h3>
+            <h1  align="center">UNIDAD EDUCATIVA FISCOMISIONAL "SAN JUAN BAUTISTA"</h1>
             <p align="center">San José-Catamayo-Loja-Ecuador</p>
             <br/>
             <h1  align="center"><strong>CERTIFICADO DE MATRÍCULA</strong></h1>
             <br />
             <br />
-            <p>Que el/la estudiante: {{matricula.estudiante.usuario.nombres}}, con C.I. {{matricula.estudiante.usuario.ci_ruc}}, previo al cumplimiento
+            <h2 style="text-align: justify">Que el/la estudiante: {{matricula.estudiante.usuario.apellidos}} {{matricula.estudiante.usuario.nombres}}, con C.I. {{matricula.estudiante.usuario.ci_ruc}}, previo al cumplimiento
             de los requisitos reglamentarios, se matriculo en {{matricula.curso}}, paralelo "{{matricula.paralelo}}" según consta
-          en la matrícula Nro:{{matricula.id}} Folio: Nro. {{matricula.id}} del año lectivo {{matricula.ciclo_lectivo.inicio}} - {{matricula.ciclo_lectivo.fin}}</p>
+          en la matrícula Nro:{{matricula.id}} Folio: Nro. {{matricula.id}} del año lectivo {{matricula.ciclo_lectivo.inicio}} - {{matricula.ciclo_lectivo.fin}}</h2>
             <br />
             <br />
-            <p>San José, {{matricula.fecha}}</p>
+            <h2>San José, {{matricula.fecha}}</h2>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="col-md-12 col-sm-12">
+              <div class="col-md-6 col-sm-6">
+                <h2 align="center">--------------------</h2>
+                <h2 align="center">RECTOR</h2>
+              </div>
+              <div class="col-md-5 col-sm-5">
+
+                <h2 align="center">--------------------</h2>
+                <h2 align="center">SECRETARIA</h2>
+            </div>
+          </div>
           </div>
 
         </div>
-        <a type="button" onclick="javascript:window.print()" type='GET'>
+      </div>
+        <a type="button" onclick="javascript:printDiv('imprimir')" type='GET'>
             <span class="btn btn-primary btn-xs glyphicon glyphicon-print" aria-hidden="true" title="Imprimir"></span>
           </a>
-      </div>
     </div>
   </div>
 </div>
 <!-- /page content -->
 {% endblock content %}
+{% block javascripts %}
+{{ block.super }}
+  <script type="text/javascript">
+    function printDiv(imprimir) {
+     var contenido= document.getElementById(imprimir).innerHTML;
+     var contenidoOriginal= document.body.innerHTML;
+
+     document.body.innerHTML = contenido;
+
+     window.print();
+
+     document.body.innerHTML = contenidoOriginal;
+}
+  </script>
+{% endblock %}

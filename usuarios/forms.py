@@ -13,9 +13,10 @@ class TimeInput(forms.TimeInput):
 	initial = timezone.now()
 
 class UsuarioForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = '__all__'
+	class Meta:
+		model = Usuario
+		fields = '__all__'
+
 
 class EstudianteForm(forms.ModelForm):
     class Meta:

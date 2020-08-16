@@ -12,8 +12,8 @@ class Usuario(models.Model):
 	nombres = models.CharField(max_length=200)
 	apellidos = models.CharField(max_length=200)
 	direccion = models.CharField(max_length= 200, null=True, blank=True)
-	telefono = models.CharField(max_length=20)
-	# celular = models.CharField(max_length=20)
+	telefono = models.CharField(max_length=20, null=True, blank=True)
+	celular = models.CharField(max_length=20, null=True, blank=True)
 
 	class Meta:
 		verbose_name = "Usuario"
