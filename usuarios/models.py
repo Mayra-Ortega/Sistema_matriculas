@@ -28,7 +28,7 @@ class Estudiante(models.Model):
     f_nacimiento = models.DateField(help_text='Fecha de nacimiento')
     lugar_nacimiento = models.CharField(max_length= 13, help_text='Sector/Canton/Provincia')
     institucion = models.ForeignKey(Institucion, blank=True, null=True, on_delete=models.CASCADE)
-    img_perfil = models.ImageField(upload_to='', help_text='Escoja una Imagen de perfil')
+    img_perfil = models.ImageField(upload_to='static/images/users', help_text='Escoja una Imagen de perfil')
 
     class Meta:
         verbose_name = "Estudiante"
@@ -84,8 +84,8 @@ class Padres(models.Model):
     ('M', 'Mamá'),
     ('P', 'Papá'),
     ]
-    padres_estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='padres_estudiante')
+    padres_estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE, related_name= 'padres_estudiante')
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='datos_padre')
     padres_familia = models.CharField(max_length = 50, choices = PADRES_FAMILIA, default='P')
     is_representante = models.BooleanField(default=False, help_text='Es representante del estudiante')
     parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE)
@@ -99,7 +99,7 @@ class Padres(models.Model):
             return self.usuario.ci_ruc
 
 class Representante(models.Model):
-	representante = models.ForeignKey(Padres, on_delete=models.CASCADE)
+	representante = models.ForeignKey(Padres, on_delete=models.CASCADE, related_name = 'representante_padres')
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
 
 	class Meta:
