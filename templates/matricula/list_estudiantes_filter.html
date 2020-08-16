@@ -17,9 +17,9 @@
         <div class="x_panel">
           <div class="x_title">
             <h3>Estudiantes</h3>
-            <a type="button" onclick="javascript:window.print()" type='GET'>
-              <span class="btn btn-primary btn-xs glyphicon glyphicon-print" aria-hidden="true" title="Imprimir"></span>
-            </a>
+            <a type="button" onclick="javascript:printDiv('imprimir')" type='GET'>
+                <span class="btn btn-primary btn-xs glyphicon glyphicon-print" aria-hidden="true" title="Imprimir"></span>
+              </a>
             <a href="{% url 'matricula:form_estudiantes_filter' %}" type='GET'>
                 <span class="btn btn-primary btn-xs glyphicon glyphicon-search" aria-hidden="true" title="Burcar de nuevo"></span>
               </a>
@@ -27,13 +27,13 @@
           <div class="x_content">
             <div class="clearfix"></div>
 
-              <div class="row">
+              <div class="row" id="imprimir">
                   <div class="col-sm-12">
                     <div class="card-box table-responsive">
                     <div class="">
-                      <h3>Año Lectivo: {{estudiante.ciclo_lectivo}}</h3>
+                      <h3>Año Lectivo: {{estudiante.ciclo_lectivo.inicio}} - {{estudiante.ciclo_lectivo.fin}}</h3>
                       <h3>Curso: {{estudiante.curso}}</h3>
-                      <h3>Paralelo: {{estudiante.paralelo}}</h3>
+                      <h3>Paralelo: {{estudiante.paralelo.nombre}}</h3>
                     </div>
             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
               <thead>
@@ -70,4 +70,19 @@
   </div>
 </div>
 </div>
-      {% endblock content %}
+{% endblock content %}
+{% block javascripts %}
+{{ block.super }}
+  <script type="text/javascript">
+    function printDiv(imprimir) {
+     var contenido= document.getElementById(imprimir).innerHTML;
+     var contenidoOriginal= document.body.innerHTML;
+
+     document.body.innerHTML = contenido;
+
+     window.print();
+
+     document.body.innerHTML = contenidoOriginal;
+}
+  </script>
+{% endblock %}
