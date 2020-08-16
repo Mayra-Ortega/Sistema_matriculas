@@ -16,10 +16,13 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_content">
-
+                      <h2>
+                          <strong>Cédula:</strong>
+                          <spam>{{object.estudiante.usuario.ci_ruc}}</spam>
+                      </h2>
                           <h2>
                               <strong>Estudiante:</strong>
-                              <spam>{{object.estudiante}}</spam>
+                              <spam>{{object.estudiante.usuario.apellidos}} {{object.estudiante.usuario.nombres}}</spam>
                           </h2>
                           <h2>
                               <strong>Año lectivo:</strong>

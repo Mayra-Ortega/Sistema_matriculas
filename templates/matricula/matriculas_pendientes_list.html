@@ -28,6 +28,7 @@
               <thead>
                 <tr>
                   <th>Id</th>
+                  <th>Cédula</th>
                   <th>Estudiante</th>
                   <th>Año lectivo </th>
                   <th>Curso</th>
@@ -44,6 +45,7 @@
                   {% for matricula in matriculas %}
                   <tr>
                     <td>{{ matricula.id }} </td>
+                    <td>{{ matricula.estudiante.usuario.ci_ruc }}</td>
                     <td>{{ matricula.estudiante.usuario.apellidos }} {{ matricula.estudiante.usuario.nombres }} </td>
                     <td>{{ matricula.ciclo_lectivo }} </td>
                     <td>{{ matricula.curso }} </td>
