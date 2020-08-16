@@ -47,7 +47,8 @@
                   <th>Nombres</th>
                   <th>Apellidos</th>
                   <th>Dirección</th>
-                  <th>Telefono</th>
+                  <th>Teléfono</th>
+                  <th>Celular</th>
                   <th>Es Representante</th>
                   <th>Parentesco</th>
                   <th>Nivel Educacion</th>
@@ -65,6 +66,7 @@
                     <td>{{ datos.usuario.apellidos }} </td>
                     <td>{{ datos.usuario.direccion  }} </td>
                     <td>{{ datos.usuario.telefono }} </td>
+                    <td>{{ datos.usuario.celular }} </td>
                     <td>
     									{% if datos.is_representante %}<img src="/static/admin/img/icon-yes.svg" alt="Si">
     									 {% else %} <img src="/static/admin/img/icon-no.svg" alt="No"> {% endif %}</td>
