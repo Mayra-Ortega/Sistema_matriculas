@@ -32,8 +32,8 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombre</th>
                   <th>Curso</th>
+                  <th>Nombre</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -43,8 +43,8 @@
                   {% for paralelo in object_list %}
                   <tr>
                     <td>{{ paralelo.id }} </td>
-                    <td>{{ paralelo.nombre }} </td>
                     <td>{{ paralelo.curso }} </td>
+                    <td>{{ paralelo.nombre }} </td>
                     <td>
                       <a href="{% url 'institucion:paralelo_detail' paralelo.pk %}" type='GET'>
     											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>

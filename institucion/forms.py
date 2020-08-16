@@ -24,7 +24,10 @@ class CursoForm(forms.ModelForm):
 class ParaleloForm(forms.ModelForm):
     class Meta:
         model = Paralelo
-        fields = '__all__'
+        fields = (
+        'curso',
+        'nombre',
+        )
 
 class PreguntaFrecuenteForm(forms.ModelForm):
     class Meta:
