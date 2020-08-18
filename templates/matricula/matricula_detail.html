@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load bootstrap4 %}
+{% load user_tags %}
 {% block content %}
 
 <div class="right_col" role="main">
@@ -49,7 +50,12 @@
                               <span>{{ object.matricula_aceptada }}</span>
                           </h2>
                           <div style="display: flex; justify-content: center;">
-                              <a href="{% url 'matricula:matriculas_pendientes_list' %}" class="btn btn-primary">Regresar</a>
+                            {% if user|has_group:"Secretaria" %}
+                            <a href="{% url 'matricula:matriculas_pendientes_list' %}" class="btn btn-primary">Regresar</a>
+                            {% endif %}
+                            {% if user|has_group:"Estudiante" %}
+                            <a href="{% url 'matricula:matricula_list' %}" class="btn btn-primary">Regresar</a>
+                            {% endif %}
                           </div>
 
                     </div>

@@ -16,7 +16,9 @@ urlpatterns = [
     path(r'matriculas_pendientes_list/', views.matriculas_pendientes_list, name = 'matriculas_pendientes_list'),
     path(r'matriculados_list/', views.matriculados_list, name = 'matriculados_list'),
     path(r'matricula_aprobacion/<int:pk>/', views.matricula_aprobacion, name = 'matricula_aprobacion'),
+    path(r'desaprobar_matricula/<int:pk>/', views.desaprobar_matricula, name = 'desaprobar_matricula'),
     path(r'certificado_matricula/<int:pk>/', views.certificado_matricula, name = 'certificado_matricula'),
+    path(r'matricula_delete/<int:pk>/', views.MatriculaDelete.as_view(), name = 'matricula_delete'),
 
     # Lista de Estudiantes
     path(r'form_estudiantes_filter/', views.form_estudiantes_filter, name = 'form_estudiantes_filter'),

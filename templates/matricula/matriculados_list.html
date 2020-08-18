@@ -60,7 +60,9 @@
                       <a href="{% url 'matricula:matricula_edit' matricula.pk %}" type='GET'>
     											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
     										</a>
-
+                        <a href="{% url 'matricula:desaprobar_matricula' matricula.pk %}" type='GET'>
+      											<span class="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" aria-hidden="true" title="Quitar Matrícula"></span>
+      										</a>
                     </td>
                   </tr>
                   {% endfor %}

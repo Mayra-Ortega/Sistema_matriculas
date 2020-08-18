@@ -7,6 +7,8 @@ from datetime import date
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.urls import reverse, reverse_lazy
+
 
 # Create your views here.
 def matricula_create(request):
@@ -79,19 +81,26 @@ class MatriculaList(ListView):
         ciclo_lectivo = CicloLectivo.objects.get(ciclo_actual=True)
         try:
             estudiante = Estudiante.objects.get(user=user)
-            hay_matricula = Matricula.objects.filter(estudiante = estudiante, ciclo_lectivo = ciclo_lectivo)
-            nro_matriculas = hay_matricula.count()
+            matriculas = Matricula.objects.filter(estudiante = estudiante, ciclo_lectivo = ciclo_lectivo)
+            print(matriculas)
+            if matriculas.count() > 0:
+                hay_matricula = True
+            else:
+                hay_matricula = False
         except Exception as e:
-            nro_matriculas = 0
-            hay_matricula = None
+            hay_matricula = False
         context = {
-            'nro_matriculas': nro_matriculas,
             'hay_matricula': hay_matricula,
+            'matriculas': matriculas,
         }
         return context
 
 class MatriculaDetail(DetailView):
 	model = Matricula
+
+class MatriculaDelete(DeleteView):
+    model = Matricula
+    success_url = reverse_lazy('matricula:matriculas_pendientes_list')
 
 def matriculas_pendientes_list(request):
     matriculas = Matricula.objects.filter(matricula_aceptada=False)
@@ -117,6 +126,17 @@ def matricula_aprobacion(request, pk):
         'matriculas': matriculas,
     }
     return render(request, 'matricula/matriculas_pendientes_list.html', context)
+
+def desaprobar_matricula(request, pk):
+    matriculas = Matricula.objects.filter(matricula_aceptada=True)
+    matricula = Matricula.objects.get(pk=pk)
+    matricula.matricula_aceptada = False
+    messages.info(request, "La matricula se desaprobo con éxito")
+    matricula.save()
+    context = {
+        'matriculas': matriculas,
+    }
+    return render(request, 'matricula/matriculados_list.html', context)
 
 def certificado_matricula(request, pk):
     matricula = Matricula.objects.get(pk=pk)

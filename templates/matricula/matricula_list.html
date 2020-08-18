@@ -18,7 +18,7 @@
           <div class="x_title">
             <h3>Mi Matricula</h3>
           </div>
-          {% if nro_matriculas <= 1  %}
+          {% if hay_matricula == False %}
             <a href="{% url 'matricula:matricula_create' %}" type='GET'>
               <span class="btn btn-success btn-xs glyphicon glyphicon-plus" aria-hidden="true" title="matriculate"> Generar Matricula</span>
             </a>
@@ -46,7 +46,7 @@
 
 
               <tbody>
-                  {% for matricula in hay_matricula %}
+                  {% for matricula in matriculas %}
                   <tr>
                     <td>{{ matricula.id }} </td>
                     <td>{{ matricula.estudiante }} </td>
@@ -71,6 +71,7 @@
                       <a href="{% url 'matricula:matricula_edit' matricula.pk %}" type='GET'>
     											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
     										</a>
+
                     </td>
                   </tr>
                   {% endfor %}

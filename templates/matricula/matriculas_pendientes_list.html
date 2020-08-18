@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load bootstrap4 %}
+{% load user_tags %}
 {% block content %}
 <div class="right_col" role="main">
   <div id="bootstrap_messages" style="margin-top:5em;">
@@ -52,9 +53,16 @@
                     <td>{{ matricula.paralelo.nombre }} </td>
                     <td>{{ matricula.observacion }} </td>
                     <td>{{ matricula.fecha }} </td>
+                    {% if user|has_group:"Secretaria" %}
                     <td><a href="{% url 'matricula:matricula_aprobacion' matricula.pk %}" type='GET'>
                         <span class="btn btn-success btn-xs glyphicon glyphicon-ok" aria-hidden="true" title="Aprobar Matrícula"></span>
-                      </a> </td>
+                      </a>
+                    </td>
+                    {% else %}
+                    <td>
+                      <p>Usted no tiene el rol para aprobar matriculas</p>
+                    </td>
+                    {% endif %}
                     <td>
                       <a href="{% url 'matricula:matricula_detail' matricula.pk %}" type='GET'>
     											<span class="btn btn-success btn-xs glyphicon glyphicon-eye-open" aria-hidden="true" title="Ver"></span>
@@ -62,7 +70,9 @@
                       <a href="{% url 'matricula:matricula_edit' matricula.pk %}" type='GET'>
     											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
     										</a>
-
+                      <a href="{% url 'matricula:matricula_delete' matricula.pk %}"  type='GET'>
+    											<span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
+    										</a>
                     </td>
                   </tr>
                   {% endfor %}
