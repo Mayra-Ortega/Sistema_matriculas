@@ -70,9 +70,11 @@
                       <a href="{% url 'matricula:matricula_edit' matricula.pk %}" type='GET'>
     											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
     										</a>
+                      {% if user|has_group:"Secretaria" %}
                       <a href="{% url 'matricula:matricula_delete' matricula.pk %}"  type='GET'>
     											<span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
     										</a>
+                      {% endif %}
                     </td>
                   </tr>
                   {% endfor %}
