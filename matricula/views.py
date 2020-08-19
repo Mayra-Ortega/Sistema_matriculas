@@ -53,6 +53,7 @@ def matricula_create(request):
 def matricula_edit(request, pk):
     matricula = Matricula.objects.get(pk=pk)
     form_matricula = MatriculaForm(instance = matricula)
+    paralelos = Paralelo.objects.all()
     hay_estudiante = True
     if request.method == 'POST':
         form_matricula = MatriculaForm(request.POST, instance = matricula)
@@ -70,6 +71,7 @@ def matricula_edit(request, pk):
     context = {
         'form_matricula': form_matricula,
         'hay_estudiante': hay_estudiante,
+        'paralelos': paralelos,
     }
     return render(request, 'matricula/matricula_form.html', context)
 
