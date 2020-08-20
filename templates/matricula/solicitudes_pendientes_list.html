@@ -61,9 +61,10 @@
                         <!-- <a href="{% url 'matricula:certificado_matricula' solicitud.pk %}" type='GET'>
                           <span class="btn btn-primary btn-xs glyphicon glyphicon-list-alt" aria-hidden="true" title="Editar Solicitud"></span>
                         </a>
-                        <a href="{% url 'matricula:certificado_matricula' solicitud.pk %}" type='GET'>
-                          <span class="btn btn-primary btn-xs glyphicon glyphicon-list-alt" aria-hidden="true" title="Eliminar Solicitud"></span>
-                        </a> -->
+                        -->
+                        <a href="{% url 'matricula:solicitud_delete' solicitud.pk %}" type='GET'>
+                          <span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar Solicitud"></span>
+                        </a>
                       </td>
                   </tr>
                   {% endfor %}

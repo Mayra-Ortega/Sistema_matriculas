@@ -55,12 +55,19 @@ def matricula_edit(request, pk):
     form_matricula = MatriculaForm(instance = matricula)
     paralelos = Paralelo.objects.all()
     hay_estudiante = True
+    es_secretaria = get_user(request)
+    es_secretaria = es_secretaria.groups.first()
+    rol = Group.objects.get(name = "Secretaria")
     if request.method == 'POST':
         form_matricula = MatriculaForm(request.POST, instance = matricula)
         if form_matricula.is_valid():
             form_matricula.save()
             messages.info(request, "La matricula se editó con éxito")
-            return redirect('matricula:matricula_list')
+            if es_secretaria == rol:
+                return redirect('matricula:matriculas_pendientes_list')
+            else:
+                return redirect('matricula:matricula_list')
+
         else:
             messages.error(request, matricula.errors)
             context = {
@@ -236,3 +243,7 @@ def ver_solicitud(request, pk):
         'solicitud':solicitud
     }
     return render(request, 'matricula/solicitud_ingreso.html', context)
+
+class SolicitudIngresoDelete(DeleteView):
+    model = SolicitudIngreso
+    success_url = reverse_lazy('matricula:solicitudes_pendientes_list')
