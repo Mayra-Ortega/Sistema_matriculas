@@ -161,15 +161,15 @@ def form_estudiantes_filter(request):
         curso = request.POST.get('curso')
         paralelo = request.POST.get('paralelo')
 
-        matriculas = Matricula.objects.filter(matricula_aceptada=True)
+        matriculas = Matricula.objects.filter(matricula_aceptada=True).order_by('estudiante__usuario__apellidos')
         estudiante = matriculas.first()
 
         if request.POST.get('ciclo_lectivo'):
-            matriculas = matriculas.filter(ciclo_lectivo_id = ciclo)
+            matriculas = matriculas.filter(ciclo_lectivo_id = ciclo).order_by('estudiante__usuario__apellidos')
         if request.POST.get('curso'):
-            matriculas = matriculas.filter(curso_id = curso)
+            matriculas = matriculas.filter(curso_id = curso).order_by('estudiante__usuario__apellidos')
         if request.POST.get('paralelo'):
-            matriculas = matriculas.filter(paralelo_id = paralelo)
+            matriculas = matriculas.filter(paralelo_id = paralelo).order_by('estudiante__usuario__apellidos')
 
         context = {
             'result_estudiantes_filter': matriculas,

@@ -35,12 +35,13 @@
                       <h3>Curso: {{estudiante.curso}}</h3>
                       <h3>Paralelo: {{estudiante.paralelo.nombre}}</h3>
                     </div>
-            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+            <table class="table table-striped table-bordered" style="width:100%">
               <thead>
                 <tr>
+                  <th>Nro</th>
                   <th>CI</th>
-                  <th>Nombres</th>
                   <th>Apellidos</th>
+                  <th>Nombres</th>
                   <th>Dirección</th>
                   <th>Teléfono</th>
                   <th>Celular</th>
@@ -51,9 +52,10 @@
               <tbody>
                   {% for matricula in result_estudiantes_filter %}
                   <tr>
+                    <td>{{forloop.counter}}</td>
                     <td>{{ matricula.estudiante.usuario.ci_ruc }} </td>
-                    <td>{{ matricula.estudiante.usuario.nombres }} </td>
                     <td>{{ matricula.estudiante.usuario.apellidos }} </td>
+                    <td>{{ matricula.estudiante.usuario.nombres }} </td>
                     <td>{{ matricula.estudiante.usuario.direccion }} </td>
                     <td>{{ matricula.estudiante.usuario.telefono }} </td>
                     <td>{{ matricula.estudiante.usuario.celular }} </td>
