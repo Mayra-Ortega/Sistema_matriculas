@@ -6,10 +6,6 @@
   <div id="bootstrap_messages" style="margin-top:5em;">
     {% bootstrap_messages %}
   </div>
-  <div class="">
-    <div class="page-title">
-
-
       <div class="clearfix"></div>
 
     <div class="row">
@@ -81,6 +77,9 @@
                         <a href="{% url 'usuarios:datos_padre_edit' datos.pk %}" type='GET'>
       											<span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
       										</a>
+                          <a href="{% url 'usuarios:datos_padres_delete' datos.pk %}"  type='GET'>
+        											<span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
+        										</a>
                       </td>
                     {% else %}
                     {% if datos.parentesco.parentesco == "Madre" %}
@@ -91,6 +90,9 @@
                         <a href="{% url 'usuarios:datos_madre_edit' datos.pk %}" type='GET'>
                             <span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
                           </a>
+                          <a href="{% url 'usuarios:datos_padres_delete' datos.pk %}"  type='GET'>
+                            <span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
+                          </a>
                       </td>
                     {% else %}
                     <td>
@@ -100,6 +102,9 @@
                       <a href="{% url 'usuarios:datos_representante_edit' datos.pk %}" type='GET'>
                           <span class="btn btn-primary btn-xs glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
                         </a>
+                        <a href="{% url 'usuarios:datos_padres_delete' datos.pk %}"  type='GET'>
+      											<span class="btn btn-danger btn-xs glyphicon glyphicon-remove" aria-hidden="true" title="Eliminar"></span>
+      										</a>
                     </td>
                     {% endif %}
                     {% endif %}
@@ -118,6 +123,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
       {% endblock content %}

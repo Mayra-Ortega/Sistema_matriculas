@@ -182,6 +182,21 @@ def datos_padres_list(request):
 class DatosPadresDetail(DetailView):
 	model = Padres
 
+def datos_padres_delete(request, pk):
+    context = {
+        'pk': pk,
+    }
+    return render(request, 'usuarios/confirm_detele_padres.html', context)
+
+def confirm_detele_padres(request, pk):
+    padre = Padres.objects.get(pk=pk)
+    usuario_padre = Usuario.objects.filter(ci_ruc = padre.usuario.ci_ruc).first()
+    usuario_padre.delete()
+    padre.delete()
+    messages.info(request, "Los datos se eliminaron con éxito")
+    return redirect('usuarios:datos_padres_list')
+    return render(request, 'usuarios/datos_padres_list.html')
+
 def datos_padre(request):
     form_usuario = UsuarioForm()
     form_padre = PadresForm()
@@ -217,7 +232,7 @@ def datos_padre(request):
 
 def datos_padre_edit(request, pk):
     padre = Padres.objects.get(pk=pk)
-    usuario_padre = Usuario.objects.get(ci_ruc = padre.usuario.ci_ruc)
+    usuario_padre = Usuario.objects.filter(ci_ruc = padre.usuario.ci_ruc).first()
     form_usuario = UsuarioForm(instance = usuario_padre)
     form_padre = PadresForm(instance= padre)
     hay_estudiante = True

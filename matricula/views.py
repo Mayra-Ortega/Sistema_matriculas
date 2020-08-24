@@ -162,7 +162,6 @@ def form_estudiantes_filter(request):
         paralelo = request.POST.get('paralelo')
 
         matriculas = Matricula.objects.filter(matricula_aceptada=True).order_by('estudiante__usuario__apellidos')
-        estudiante = matriculas.first()
 
         if request.POST.get('ciclo_lectivo'):
             matriculas = matriculas.filter(ciclo_lectivo_id = ciclo).order_by('estudiante__usuario__apellidos')
@@ -171,6 +170,7 @@ def form_estudiantes_filter(request):
         if request.POST.get('paralelo'):
             matriculas = matriculas.filter(paralelo_id = paralelo).order_by('estudiante__usuario__apellidos')
 
+        estudiante = matriculas.first()
         context = {
             'result_estudiantes_filter': matriculas,
             'estudiante': estudiante,
